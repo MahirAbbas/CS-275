@@ -5,3 +5,5 @@ I use https://obsidian.md
 
 will be updated.
 if you would like, clone the repo and fix errors etc. and maybe create pull requests
+
+will be taken down at the end of semester
