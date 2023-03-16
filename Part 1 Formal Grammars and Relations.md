@@ -158,9 +158,9 @@ Consider a grammar $G$ specified by terminals $\Sigma$, non-terminals $\mathcal{
 **Explanation**
 In the context of formal languages and automata theory, the one-step derivation relation is a binary relation between strings, denoted by the symbol $\hookrightarrow$. It represents the ability of a formal grammar to generate a string by replacing a single nonterminal symbol with a string of terminal and/or nonterminal symbols.
 
-More formally, given a context-free grammar $G = (V, Σ, R, S)$, where $V$ is a set of nonterminal symbols, $Σ$ is a set of terminal symbols, $R$ is a set of production rules, and $S$ is the start symbol, the one-step derivation relation is defined as follows:
+More formally, given a context-free grammar $G = (V, Σ, R, S)$, where $G$ is a set of nonterminal symbols, $Σ$ is a set of terminal symbols, $R$ is a set of production rules, and $S$ is the start symbol, the one-step derivation relation is defined as follows:
 
-For any strings $α, β$, and $γ \in (V ∪ Σ)*$ and any nonterminal symbol $A ∈ V, αAβ → αγβ$ if and only if there exists a production rule $A → γ \in R$.
+For any strings $α, β$, and $γ \in (V ∪ Σ)^*$ and any nonterminal symbol $A ∈ G,\quad αAβ → αγβ$ if and only if there exists a production rule $A → γ \in R$.
 
 This means that if the nonterminal symbol $A$ appears in the middle of a string $αAβ$, it can be replaced with the string $γ$ to obtain a new string $αγβ$. This new string can then be used as input to the one-step derivation relation again, possibly leading to further string expansions.
 

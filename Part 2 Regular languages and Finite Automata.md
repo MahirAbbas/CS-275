@@ -2,11 +2,26 @@
 **Definition**
 A non-deterministic finite automaton over an alphabet $Σ$ is  given by a set $V$ of states, a transition relation $δ ⊆V ×Σ ×V$, a  start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.
 
-**A finite state automaton 1**
+
+**A finite state automaton **
 ![[Pasted image 20230314152250.png]]
 ### A run of an automaton  
 **Definition**
-A run of an automaton $\mathcal{A}$ on a word $w ∈Σ^∗$ is a word  $q_0q_1 ...q_{|w|} ∈V^∗$ such that $q_0 = s$ and  $∀i < |w|(q_i,w_i,q_{i+1}) ∈δ$. If $q_{|w|} ∈F$, it is *accepting*, otherwise it is rejecting. An automaton accepts a word $w ∈Σ^∗ \iff \exists$ an accepting run on $w$. We let $L(A)$ be the language of  all words accepted by $\mathcal{A}$.
+A run of an automaton $\mathcal{A}$ on a word $w ∈Σ^∗$ is a word  $q_0q_1 ...q_{|w|} ∈V^∗$ such that $q_0 = s$ and  $∀i < |w|(q_i,w_i,q_{i+1}) ∈δ$. If $q_{|w|} ∈F$, it is *accepting*, otherwise it is rejecting. An automaton accepts a word $w ∈Σ^∗ \iff$ there exists an accepting run on $w$. We let $L(\mathcal{A})$ be the language of  all words accepted by $\mathcal{A}$.
+
+A non-deterministic finite automaton (NFA) is a formal model of computation that recognizes regular languages. It consists of a finite set of states, a set of input symbols, a transition function, a start state, and a set of accept states.
+
+Formally, an NFA is defined as a 5-tuple $(Q, \Sigma, \delta, q_0, F)$, where:
+
+- $Q$ is a finite set of states.
+- $\Sigma$ is a finite set of input symbols.
+- $\delta: Q \times \Sigma \rightarrow 2^Q$ is a transition function that maps a state and an input symbol to a set of states. This means that there can be multiple possible states to transition to from a given state on a given input symbol.
+- $q_0 \in Q$ is the start state.
+- $F \subseteq Q$ is a set of accept states.
+
+Intuitively, we can think of an NFA as a machine that reads an input string one symbol at a time and moves from state to state based on the input symbols it reads. At each step, the NFA can be in multiple states, and it can transition to multiple states on the same input symbol. The machine accepts an input string if there is at least one path of transitions that leads from the start state to an accept state.
+
+To determine whether an NFA accepts a given input string, we can start at the start state and follow all possible paths of transitions on the input symbols in the string. If we reach the end of the string and end up in an accept state, then the input string is accepted. If there is no such path, then the input string is rejected.
 
 ![[Pasted image 20230314153012.png]]
 $abba ⇒$ no  
@@ -18,7 +33,7 @@ Given a word $w ∈Σ^∗$, let its reversal $w^R∈Σ^∗$ be defined by  $|w^R
 (This literally says that $w^R$ is w read backwards.)
 
 **Definition**  
-Given a language $L ⊆Σ^∗$, let $L^R:= {w^R|w ∈L}$.
+Given a language $L ⊆Σ^∗$, let $L^R:= \{w^R|w ∈L\}$.
 **Theorem**  
 If $L$ is regular, then so is $L^R$.
 
@@ -28,14 +43,9 @@ If $L$ is regular, then so is $L^R$.
 - Regular expressions!
 
 # Non-deterministic finite automata and  Regular Languages
-**Definition**  
-A non-deterministic finite automaton over an alphabet $Σ$ is given by a set $V$ of states, a transition relation $δ ⊆V ×Σ ×V$, a start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.
-![[Pasted image 20230314153012.png]]
 **Equivalence**  
 **Theorem**  
 Right-linear grammars and non-deterministic automata describe the same languages. (We call those languages regular.)
-**Theorem**  
-Right-linear grammars and non-deterministic automata  describe the same languages. (We call those languages regular.)
 *Proof.*  
 We translate back and forth:  
 - Non-terminal symbols correspond to states (start symbol to start state).  
@@ -43,7 +53,10 @@ We translate back and forth:
 - We have a rule $T →aR \iff$ there is a transition  $(T,a,R) ∈δ$.
 
 **Exercise**
-Take the grammar with non-terminals $\mathcal{N} = {S,A,B,C}$ and rules $$S →ε, S →aA, S →bB, S →aC, A →aA, A →bB,B →aC, B →bC, C →ε, C →aA.$$
+Take the grammar with non-terminals $\mathcal{N} = {S,A,B,C}$ and rules 
+$$\begin{align*} 
+S &\rightarrow \varepsilon, \\ S &\rightarrow aA, \\ S &\rightarrow bB, \\ S &\rightarrow aC, \\ A &\rightarrow aA, \\ A &\rightarrow bB, \\ B &\rightarrow aC, \\ B &\rightarrow bC, \\ C &\rightarrow \varepsilon, \\ C &\rightarrow aA. \\ \end{align*}$$
+
 Draw the automaton it corresponds to.
 
  # From non-deterministic to determinsitic
@@ -52,6 +65,23 @@ Draw the automaton it corresponds to.
 A non-deterministic finite automaton over an alphabet $Σ$ is given by a set $V$ of states, a transition relation $δ ⊆V ×Σ ×V$ , a  start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.  
 **Definition**  
 A deterministic finite automaton over an alphabet $Σ$ is given by a set $V$ of states, a transition function $δ : V ×Σ →V$ , a start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.
+
+A deterministic finite automaton (DFA) is a type of finite-state machine that recognizes regular languages. Like an NFA, a DFA has a finite set of states, a set of input symbols, a transition function, a start state, and a set of accept states. However, the key difference between a DFA and an NFA is that a DFA has exactly one state to transition to on a given input symbol.
+
+Formally, a DFA is defined as a 5-tuple $(Q, \Sigma, \delta, q_0, F)$, where:
+
+-   $Q$ is a finite set of states.
+-   $\Sigma$ is a finite set of input symbols.
+-   $\delta: Q \times \Sigma \rightarrow Q$ is a transition function that maps a state and an input symbol to a single state. This means that there is exactly one possible state to transition to from a given state on a given input symbol.
+-   $q_0 \in Q$ is the start state.
+-   $F \subseteq Q$ is a set of accept states.
+
+Intuitively, we can think of a DFA as a machine that reads an input string one symbol at a time and moves from state to state based on the input symbols it reads. At each step, the DFA is in exactly one state, and it transitions to exactly one state on the same input symbol. The machine accepts an input string if the sequence of transitions leads to an accept state.
+
+To determine whether a DFA accepts a given input string, we can start at the start state and follow the unique path of transitions on the input symbols in the string. If we reach the end of the string and end up in an accept state, then the input string is accepted. If there is no such path, then the input string is rejected.
+
+In terms of formal language theory, DFAs are equivalent in power to NFAs. However, DFAs are often more efficient in terms of space and time complexity, since they do not need to explore multiple possible paths of transitions. They are also easier to implement in hardware or software.
+
 *A Technicality*
 A state in a deterministic finite automaton has outgoing edges with all labels – but we usually don’t draw dead ends.
 *Equivalence*  
@@ -60,18 +90,33 @@ Deterministic and non-deterministic finite automata recognize the same languages
 
 #### The powerset construction
 **Definition**  
-By $P(X)$ we denote the powerset of the set $X$, i.e. $P(X) = {S |S ⊆X}$.  
+By $P(X)$ we denote the powerset of the set $X$, i.e. $P(X) = \{S |S ⊆X\}$.
 **Proof.**  
 Given a non-deterministic finite automaton with states $V$ and transition relation $δ$, let the powerset construction automaton be the deterministic finite automaton with:  
 - states $P(X)$
-- transition function $∆$ where $∆(S,a) = {q ∈V |∃r ∈S (r ,a,q) ∈δ}$
+- transition function $∆$ where $∆(S,a) = \{q ∈V |∃r ∈S (r ,a,q) ∈δ\}$
 - initial state ${s}$ (where $s$ is the initial state of the original automaton)  
-- final states ${S |S ∩F \neq ∅}$(where $F$ is the set of final states of the original automaton)
+- final states $\{S |S ∩F \neq ∅\}$(where $F$ is the set of final states of the original automaton)
+
+The powerset of a set $X$ is the set of all possible subsets of $X$. If we have an NFA with a set of states $Q$, then the powerset construction is a technique used to construct a DFA that recognizes the same language as the NFA.
+
+To apply the powerset construction, we first create a new DFA with a set of states that is the powerset of the original NFA's set of states $Q$. This means that each state in the new DFA corresponds to a subset of states in the original NFA.
+
+Next, we define the transition function for the new DFA. For each state $R$ in the new DFA and each input symbol $a \in \Sigma$, we define the set of states that the NFA can be in after reading $a$ from any state in $R$. We then find the state in the new DFA that corresponds to this set of states, and define the transition from $R$ on $a$ to be that state.
+
+Finally, we mark any state in the new DFA that contains an accept state from the original NFA as an accept state in the new DFA.
+
+The resulting DFA recognizes the same language as the original NFA. The powerset construction can be used to convert any NFA to a DFA, which can be useful for certain applications such as implementing regular expressions in software.
+
+
+
 ###### A consequence  
 **Definition**  
-Given a language $L$, let $L^C = {w ∈Σ^∗ |w \notin L}$.  
+Given a language $L$, let $L^C = \{w ∈Σ^∗ |w \notin L\}$.  
 **Corollary**  
 If $L$ is regular, then so is $L^C$ .
+
+$^C$ denoting complement. E.g. if we have a set $\mathbb{R}$ with a subset $\mathbb{Q}$ , then $\mathbb{Q}^C$ is the set of all irrational numbers, or "not" $\mathbb{Q}$
 
 ###### A heads-up  
 - Determinizing a non-determinsitic finite automaton is a very natural exam question.  
