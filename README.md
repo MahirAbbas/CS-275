@@ -13,7 +13,7 @@ if you would like, clone the repo and fix errors etc. and maybe create pull requ
 will be likely be taken down at the end of semester
 
 
-to replicate it the way I use it (to minimise errors) download obisdian, clone this repo, and open this folder as theobsidian vaule. 
+to replicate it the way I use it (to minimise errors) download obisdian, clone this repo, and open this folder as the obsidian vault. 
 
 
 I may also include an ANKI deck if people would like.
