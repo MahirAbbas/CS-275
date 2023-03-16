@@ -1,3 +1,5 @@
+*Reccomended Reading: Introduction to Automata Theory, Languages, and Computation, 3rd edition, E. Hopcraft, Motwani, D. Ulman, Chapter 4,5*
+
 # What is a Formal Grammar?
 ## Defining formal grammars
 - We have our alphabet $Σ$, the elements of which we call terminal symbols (and often use $\{a, b, c, . . .\}$). 

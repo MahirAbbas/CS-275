@@ -1,7 +1,8 @@
+*Reccomended Reading: Introduction to Automata Theory, Languages, and Computation, 3rd edition, E. Hopcraft, Motwani, D. Ulman, Chapter 2*
+ 
 # Non-deterministic finite automata: Definition
 **Definition**
 A non-deterministic finite automaton over an alphabet $Σ$ is  given by a set $V$ of states, a transition relation $δ ⊆V ×Σ ×V$, a  start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.
-
 
 **A finite state automaton **
 ![[Pasted image 20230314152250.png]]
@@ -15,7 +16,7 @@ Formally, an NFA is defined as a 5-tuple $(Q, \Sigma, \delta, q_0, F)$, where:
 
 - $Q$ is a finite set of states.
 - $\Sigma$ is a finite set of input symbols.
-- $\delta: Q \times \Sigma \rightarrow 2^Q$ is a transition function that maps a state and an input symbol to a set of states. This means that there can be multiple possible states to transition to from a given state on a given input symbol.
+- $\delta: Q \times \Sigma \rightarrow 2^Q$ is a transition function that maps a state and an input symbol to a set of states. This means that *there can be multiple possible states to transition to from a given state on a given input symbol*.
 - $q_0 \in Q$ is the start state.
 - $F \subseteq Q$ is a set of accept states.
 
@@ -144,6 +145,16 @@ Given two finite automata $\mathcal{A}_i = (V_i,s_i,δ_i,F_i)_{i∈\{1,2\}},$ le
 3. and $F = F_1 ×F_2 = \{(q_1,q_2) |q_1 ∈F_1 ∧q_2 ∈F_2\}$  
 The product automaton recognizes the intersection of the languages recognized by its constituents.
 
+The product automaton is a construction used to combine two automata into a single automaton that recognizes the language recognized by both of the original automata.
+
+Suppose we have two DFAs, $M_1 = (Q_1, \Sigma, \delta_1, q_{1,0}, F_1)$ and $M_2 = (Q_2, \Sigma, \delta_2, q_{2,0}, F_2)$. The product automaton of $M_1$ and $M_2$ is denoted by $M = (Q, \Sigma, \delta, (q_{1,0}, q_{2,0}), F)$, where:
+
+$Q = Q_1 \times Q_2$ is the set of states in the product automaton. Each state in $Q$ corresponds to a pair of states, one from $M_1$ and one from $M_2$.
+$\delta((p_1, p_2), a) = (\delta_1(p_1, a), \delta_2(p_2, a))$ is the transition function for the product automaton. Given a pair of states $(p_1, p_2)$ and an input symbol $a$, the product automaton transitions to the pair of states $(\delta_1(p_1, a), \delta_2(p_2, a))$.
+$(q_{1,0}, q_{2,0})$ is the initial state of the product automaton.
+$F = {(p_1, p_2) | p_1 \in F_1 \text{ and } p_2 \in F_2}$ is the set of accept states in the product automaton.
+The language recognized by the product automaton is the intersection of the languages recognized by the original DFAs, i.e., $L(M) = L(M_1) \cap L(M_2)$. Intuitively, the product automaton simulates the two DFAs simultaneously, keeping track of their respective states as it reads input symbols. It accepts a string if both DFAs accept the string.
+
 **Argument for union**  
 1. We are given two grammars $G_1$ and $G_2$.  
 2. We add a “fresh copy” $S'′$ of the start symbol to each grammar, and for any rule with $S$ on the left add the corresponding version with $S′$ instead, and replace any $S$ on the right with $S′$.  
@@ -157,7 +168,7 @@ Take a deterministic automaton for L (including dead ends!!!),  and make final s
 
 ###### Concatenation  
 **Definition**  
-Given languages $L_1, L_2$, let their concatenation be  $L_1 ◦L_2 := {uw |u ∈L_1 ∧w ∈L_2}$ 
+Given languages $L_1, L_2$, let their concatenation be  $L_1 ◦L_2 := \{uw |u ∈L_1 ∧w ∈L_2\}$ 
 (sometimes written at $L_1L_2$).  
 **Theorem**  
 If $L_1,L_2$ are regular, then so is $L_1 ◦L_2$.
@@ -168,11 +179,23 @@ If $L_1,L_2$ are regular, then so is $L_1 ◦L_2$.
 - Change any rule of the form $T →ε$ in $G_1$ to be $T →S_2$ instead. 
 - Put everything in one grammar $G$, we have that  $L(G) = G_1 ◦G_2$.
 
-##### Kleene-star  
+##### Kleene-star  ($L^*$)
 **Definition**  
 Given a language $L$, let $L^0 = {ε}$, $L^{n+1} = LL^n$ and $L^∗ = \cup_{n∈\mathbb{N}}L^n$.  
 **Theorem**  
 If $L$ is regular, so is $L^∗$.
+
+The Kleene star, denoted as $L^*$, is an operation on a language $L$ that represents the set of all possible concatenations of zero or more strings from $L$. In other words, if $L$ is a language over an alphabet $\Sigma$, then $L^*$ is the language over $\Sigma$ that contains all possible concatenations of any number of strings in $L$, including the empty string.
+
+Formally, the Kleene star operation can be defined as:
+
+$$L^* = \bigcup_{i=0}^{\infty}L^i$$
+
+where $L^0$ is the language containing only the empty string $\epsilon$, and $L^i$ is the concatenation of $i$ copies of $L$:
+
+$$L^i = \underbrace{L \cdot L \cdot \ldots \cdot L}_{i \text{ times}}$$
+
+For example, if $L = \{ab, c\}$, then $L^* = \{\epsilon, ab, c, abab, abc, cab, cc, ababab, ababc, abcab, abcc, cabab, cabc, ccab, ccc, \ldots\}$.
 
 ###### Summary
 **Regular languages**  
@@ -190,25 +213,24 @@ The following are equivalent for a formal language:
 **Closure properties**  
 **Theorem**  
 If $L_1$ and $L_2$ are regular languages, then so are:  
-1. L^R_1  
-2. L_1 ∩L_2  
-3. L_1 ∪L_2  
+1. $L^R_1$  
+2. $L_1 ∩L_2$
+3. $L_1 ∪L_2$
 4. $Σ^∗\backslash L_1$  
 5. $L_1 ◦L_2$  
 6. $L^∗_1$
 
 ###### Excercises
 1. Find a left-linear grammar for the language $\{aab,bbbb\}$.  
-2. Try to construct a finite automaton for the language over the alphabet $Σ = {a,b}$ of all words with exactly 3 b’s in it.  
+2. Try to construct a finite automaton for the language over the alphabet $Σ = \{a,b\}$ of all words with exactly 3 b’s in it.  
 3. Try to construct a finite automaton for $\{a^nb^m |n,m ∈\mathbb{N}\}$.  
-4. Try to construct a finite automaton for ${a^nb^n |n ∈\mathbb{N}}$.
+4. Try to construct a finite automaton for $\{a^nb^n |n ∈\mathbb{N}\}$.
 # Closure properties and regular expressions
 
 **Meaning**  
 1. $∅$ denotes the empty language.  
 2. $ε$ denotes the language $\{ε\}$  
 3. a denotes the language $\{a\}$  
-4. $R|Q$ denotes the language given by the union of the languages denoted by $R,Q$  
 5. $RQ$ denotes the language given by the concatenation of  the languages denoted by $R,Q$  
 6. $R^∗$ denotes the language given by the Kleene star of the language denoted by $R$
 
@@ -237,6 +259,21 @@ describes the same language $\{a^nb^n |n > 0\}$ much more elegantly.
 ###### The pumping lemma  
 If $L$ is regular, then $∃k ∈\mathbb{N}$ such that $∀p ∈L, |p|≥k$ there exists ($∃$) a splitting $p =uvw$ where $|uv|≤k$ and $v \neq \epsilon$ such that  $∀_i ∈ \mathbb{N}$ it holds that $uv^iw ∈L$.
 
+The Pumping Lemma is a theorem in formal language theory that provides a tool for proving that a language is not regular. It is based on the fact that regular languages have a property called "pumping lemma for regular languages", which allows us to identify certain patterns in the strings of the language that cannot be preserved when the string is "pumped" (i.e., repeated a certain number of times).
+
+Formally, the pumping lemma states that for any regular language $L$, there exists a constant $p$ (which depends only on $L$) such that for any string $w$ in $L$ of length at least $p$, we can write $w$ as $xyz$, where:
+
+$|y| \geq 1$
+$|xy| \leq p$
+for all $i \geq 0$, $xy^iz \in L$
+In other words, if $L$ is a regular language, then every sufficiently long string $w$ in $L$ can be split into three parts $x, y,$ and $z$ such that $y$ contains at least one symbol, and for any positive integer $i$, the string obtained by repeating $y$ $i$ times and concatenating the result with $x$ and $z$ is still in $L$.
+
+The pumping lemma provides a tool for proving that a language is not regular by contradiction. Suppose we want to prove that a language $L$ is not regular. We assume that $L$ is regular, and then we use the pumping lemma to show that there exists a string $w$ in $L$ that cannot be pumped. This contradicts the pumping lemma, and therefore, our assumption that $L$ is regular must be false.
+
+The pumping lemma is a powerful tool for proving that a language is not regular, but it does not tell us anything about whether a language is regular or not. It only provides a necessary condition for a language to be regular. In other words, if a language fails the pumping lemma, it is not regular, but if a language passes the pumping lemma, it may or may not be regular.
+
+[The Pumping Lemma, video explanation](https://youtu.be/dikEDuepOtI)
+
 ###### Pumping lemma, contraposition  
 - If for all $k ∈\mathbb{N}$ you can pick a word $p ∈L$ with $|p|≥k$
 - such that however $p$ is written as $p =uvw$ (subject to $|uv|≤k$ and $v \neq ε$)  
@@ -254,13 +291,8 @@ $L_{pal}$ is not regular.
 
 Task: Prove that ${a^nb^n |n ∈\mathbb{N}}$ is not regular.
 
-##### Pumping lemma, contraposition  
-- If for all $k ∈\mathbb{N}$ you can pick a word $p ∈L$ with $|p|≥k$
-- such that however $p$ is written as $p = uvw$ (subject to  $|uv |≤k$ and $v \neq ε$)  
-- you can find some $i ∈ \mathbb{N}$ such that $uv^i w \notin L$,  
-- then $L$ is not regular.
 **An application**  
-Consider the language over the alphabet $Σ = {(, ), +, ×, 0, 1, 2}$  generated by the following grammar:  
+Consider the language over the alphabet $Σ = \{(, ), +, ×, 0, 1, 2\}$  generated by the following grammar:  
 - $S →0 ; S →1 ; S →2$
 - $S →(S + S)$
 - $S →(S ×S)$  
