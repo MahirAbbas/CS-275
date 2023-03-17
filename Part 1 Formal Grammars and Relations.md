@@ -158,7 +158,7 @@ Let $S = \{(n, n + 1) | n ∈ \mathbb{N}\}$. Then $S^+ = <$.
 #### Definition 
 Consider a grammar $G$ specified by terminals $\Sigma$, non-terminals $\mathcal{N}$ , start symbol $S$ and set rules $R$. The one-step derivation relation on $(Σ ∪ \mathcal{N} )^∗$ is defined as: $$\hookrightarrow := \{(\text{uvw, uv′w}) | u, v, w, v ′ ∈ (Σ ∪ \mathcal{N} )^∗ \quad (v, v′) ∈ R\}$$
 **Explanation**
-In the context of formal languages and automata theory, the one-step derivation relation is a binary relation between strings, denoted by the symbol $\hookrightarrow$. It represents the ability of a formal grammar to generate a string by replacing a single nonterminal symbol with a string of terminal and/or nonterminal symbols.
+In the context of formal languages and automata theory, the one-step derivation relation is a binary relation between strings, denoted by the symbol $\hookrightarrow$. It represents the ability of a formal grammar to generate a string by replacing a single non-terminal symbol with a string of terminal and/or nonterminal symbols.
 
 More formally, given a context-free grammar $G = (V, Σ, R, S)$, where $G$ is a set of nonterminal symbols, $Σ$ is a set of terminal symbols, $R$ is a set of production rules, and $S$ is the start symbol, the one-step derivation relation is defined as follows:
 

@@ -3,7 +3,6 @@
 # Non-deterministic finite automata: Definition
 **Definition**
 A non-deterministic finite automaton over an alphabet $Σ$ is  given by a set $V$ of states, a transition relation $δ ⊆V ×Σ ×V$, a  start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.
-
 **A finite state automaton **
 ![[Pasted image 20230314152250.png]]
 ### A run of an automaton  
@@ -16,7 +15,7 @@ Formally, an NFA is defined as a 5-tuple $(Q, \Sigma, \delta, q_0, F)$, where:
 
 - $Q$ is a finite set of states.
 - $\Sigma$ is a finite set of input symbols.
-- $\delta: Q \times \Sigma \rightarrow 2^Q$ is a transition function that maps a state and an input symbol to a set of states. This means that *there can be multiple possible states to transition to from a given state on a given input symbol*.
+- $\delta: Q \times \Sigma \rightarrow 2^Q$ is a transition function that maps a state and an input symbol to a set of states. This means that *there can be multiple possible states to transition to from a given state on a given input symbol*.(See how in diagram above, some state transitions)
 - $q_0 \in Q$ is the start state.
 - $F \subseteq Q$ is a set of accept states.
 
@@ -42,11 +41,14 @@ If $L$ is regular, then so is $L^R$.
 - Deterministic automata would be even nicer.  
 - Regular languages are closed under union, intersection, interleaving.  
 - Regular expressions!
-
 # Non-deterministic finite automata and  Regular Languages
 **Equivalence**  
 **Theorem**  
 Right-linear grammars and non-deterministic automata describe the same languages. (We call those languages regular.)
+
+**Definition**
+**Regular Language**
+A regular language can be shown with a finite state automata
 *Proof.*  
 We translate back and forth:  
 - Non-terminal symbols correspond to states (start symbol to start state).  
@@ -83,6 +85,12 @@ To determine whether a DFA accepts a given input string, we can start at the sta
 
 In terms of formal language theory, DFAs are equivalent in power to NFAs. However, DFAs are often more efficient in terms of space and time complexity, since they do not need to explore multiple possible paths of transitions. They are also easier to implement in hardware or software.
 
+![[Pasted image 20230316140332.png]]
+![[Pasted image 20230316141843.png]]
+Figure. Deterministic Finite Automata
+
+Notice how the DFA can only do one transition at a particular state given a particular input, while the NFA above, can make multiple transitions given a particular input (for e.g., at $A$, given input $a$ it can transition to either $B$ or $E$ )
+
 *A Technicality*
 A state in a deterministic finite automaton has outgoing edges with all labels – but we usually don’t draw dead ends.
 *Equivalence*  
@@ -108,8 +116,8 @@ Next, we define the transition function for the new DFA. For each state $R$ in t
 Finally, we mark any state in the new DFA that contains an accept state from the original NFA as an accept state in the new DFA.
 
 The resulting DFA recognizes the same language as the original NFA. The powerset construction can be used to convert any NFA to a DFA, which can be useful for certain applications such as implementing regular expressions in software.
-
-
+**Formula for calculating no. of elements in $P(X)$**
+$|P(X) = 2^{|S|}$
 
 ###### A consequence  
 **Definition**  
@@ -137,7 +145,7 @@ If $L$ is a regular language, then so is $L^R$ (its reversal).
 **Theorem**  
 If $L_1,L_2$ are regular languages, then so are $L_1 ∩L_2$ and $L_1 ∪L_2$.
 
-##### The technical tool
+##### Product Automaton 
 **Definition**  
 Given two finite automata $\mathcal{A}_i = (V_i,s_i,δ_i,F_i)_{i∈\{1,2\}},$ let their product be $(V_1 ×V_2,(s_1,s_2),δ×,F)$ where  
 1. $((q_1,q_2),a,(q′_1,q′_2)) ∈δ_×  \iff (q_i,a,q′_i ) ∈δ_i$ for both $i ∈\{1,2\}$ (non-deterministic case)  
@@ -160,6 +168,13 @@ The language recognized by the product automaton is the intersection of the lang
 2. We add a “fresh copy” $S'′$ of the start symbol to each grammar, and for any rule with $S$ on the left add the corresponding version with $S′$ instead, and replace any $S$ on the right with $S′$.  
 3. Rename all non-terminals in $G_2$ to be distinct of those in $G_1$.  
 4. Gather all rules together, and we have a formal grammar for $L(G_1) ∪L(G_2)$.
+
+## ***TODO*** HOW TO CONSTRUCT UNION/INTERSECTION AUTOMATON
+
+## TODO HOW TO USE TRANSITION TABLES
+
+
+
 ##### Complement  
 **Theorem**  
 If $L$ is a regular language, so is $Σ^∗ \backslash L$ (meaning all words not  belonging to $L$).  
@@ -239,6 +254,30 @@ If $L_1$ and $L_2$ are regular languages, then so are:
 A language is regular if and only if there is a regular expression denoted by it.  
 - That regular expressions denote regular languages follows from the closure properties we saw today.  
 - We’ll leave the other direction for later.
+
+**Regular expressions  
+Definition**  
+Regular expressions are defined as follows:  
+1. $∅$ is a regular expression.  
+2. $ε$ is a regular expression.  
+3. $a$ is a regular expression for each a ∈Σ.  
+4. $R|Q$ is a regular expression whenever R and Q are.  
+5. $RQ$ is a regular expression whenever R and Q are.  
+6. $R^∗$ is a regular expression whenever R is.
+
+*Meaning*
+1. $∅$ denotes the empty language.
+2. $ε$ denotes the language {ε}
+3. $a$ denotes the language {a}
+4. $R|Q$ denotes the language given by the union of the
+languages denoted by $R,Q$
+5. $RQ$ denotes the language given by the concatenation of
+the languages denoted by $R,Q$
+6. $R^∗$ denotes the language given by the Kleene star of the
+language denoted by $R$
+
+
+
 
 # The pumping lemma
 *Motivating example*  
