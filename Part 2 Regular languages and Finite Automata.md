@@ -311,7 +311,10 @@ The pumping lemma provides a tool for proving that a language is not regular by 
 
 The pumping lemma is a powerful tool for proving that a language is not regular, but it does not tell us anything about whether a language is regular or not. It only provides a necessary condition for a language to be regular. In other words, if a language fails the pumping lemma, it is not regular, but if a language passes the pumping lemma, it may or may not be regular.
 
+
 [The Pumping Lemma, video explanation](https://youtu.be/dikEDuepOtI)
+[Pumping Lemma Example 1](https://youtu.be/Ty9tpikilAo)
+[Pumping Lemma, Ex2](https://youtu.be/kZzH8E-s-9o)
 
 ###### Pumping lemma, contraposition  
 - If for all $k ∈\mathbb{N}$ you can pick a word $p ∈L$ with $|p|≥k$
