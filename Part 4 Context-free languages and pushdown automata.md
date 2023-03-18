@@ -3,6 +3,12 @@
 **Proposition**  
 The language $\{a^nb^n |n ∈\mathbb{N}\}$ is context-free, but not regular.
 
+
+**Remember Chomsky's Heirarchy**
+3. Regular Grammar - recognised by *finite state automaton*
+2. Context Free Grammar - recognised by *pushdown automaton*
+1. Context Sensitve Grammar - recognised by *linear bounded automaton*
+
 ###### Parse trees  
 **Definition**  
 A parse tree for a context-free grammar is a tree labelled by terminals, non-terminals and $ε$ subject to the following rules:
@@ -78,6 +84,33 @@ A pushdown automaton over an alphabet $Σ$ is given by a tuple $(Q,Γ,δ,F)$ whe
 1. $Q$ is the set of states, there is a special start state $q_0 ∈Q$, and $F ⊆Q$ is the set of final states.  
 2. $Γ$ is the stack alphabet, with a special symbol $⊥ \notin Γ$ indicating that the stack is empty.  
 3. $δ ⊆Q ×(Σ ∪\{ε\}) ×(Γ ∪⊥) ×Q ×(Γ ∪⊥)$ is the transition relation.
+
+A pushdown automaton (PDA) is a type of automaton that extends the capabilities of a DFA by adding a stack. A PDA can recognize context-free languages, which cannot be recognized by a DFA. The stack in a PDA allows the automaton to keep track of the history of the input read so far, which is used to make decisions about future input symbols.
+
+A PDA is defined by a 7-tuple $(Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$, where:
+
+$Q$ is a finite set of states
+$\Sigma$ is the input alphabet
+$\Gamma$ is the stack alphabet
+$\delta$ is the transition function $Q \times (\Sigma \cup {\epsilon}) \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma^*)$, where $\mathcal{P}$ denotes the power set
+$q_0$ is the initial state
+$Z_0$ is the initial stack symbol
+$F \subseteq Q$ is the set of final states
+
+Intuitively, a PDA works as follows: at each step, the PDA reads an input symbol from the input tape and examines the top symbol on the stack. Based on the current state, the input symbol, and the top symbol on the stack, the PDA decides which state to transition to and which symbols to push or pop from the stack. The PDA continues to read input symbols and manipulate the stack until it reaches an accepting state or a rejecting state. If the PDA reaches an accepting state, it accepts the input; otherwise, it rejects the input.
+
+Compared to a DFA, a PDA has the added capability of using the stack to recognize context-free languages. While a DFA can only recognize regular languages, a PDA can recognize a larger class of languages that includes regular languages and context-free languages. The stack in a PDA allows it to remember information about the input read so far, which enables it to recognize patterns that a DFA cannot.
+
+One way to understand the concept of a PDA is to think of it as a robot with a hand that can pick up and put down blocks on a stack. The blocks represent the symbols in the input alphabet and the stack alphabet, and the robot's hand represents the stack. The robot starts with an empty hand (the stack is empty) and an initial state. It then picks up the first block (reads the first input symbol) and looks at its current state and the block it is holding to determine what to do next. Depending on the current state, the input symbol, and the top block on the stack, the robot may transition to a new state, push a block onto the stack, or pop a block off the stack. It continues in this way, reading input symbols and manipulating the stack, until it reaches a final state or a rejecting state. If the robot reaches a final state, it has successfully recognized the input; otherwise, it has rejected the input.
+
+**Links to explanations**
+[Pushdown Automata (Introduction)](https://youtu.be/4ejIAmp_Atw)
+[Pushdown Automata (Formal Definition)](https://youtu.be/JtRyd7Svlew)
+[Pushdown Automata (Graphical Notation)](https://youtu.be/eY7fwj5jvC4)
+[Pushdown Automata Example (Even Palindrome) PART-1](https://youtu.be/TEQcJybMMFU)
+[Pushdown Automata Example (Even Palindrome) PART-2](https://youtu.be/BxA-aI2dyRo)
+[Pushdown Automata Example (Even Palindrome) PART-3](https://youtu.be/xHj2WI1Rrl4)
+
 
 ###### Configurations  
 **Definition**  

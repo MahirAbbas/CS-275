@@ -1,5 +1,12 @@
 *Reccomended Reading: Introduction to Automata Theory, Languages, and Computation, 3rd edition, E. Hopcraft, Motwani, D. Ulman, Chapter 2*
- 
+# Regular Language
+ A regular language is a language that can be recognized by a deterministic finite automaton (DFA) or a non-deterministic finite automaton (NFA). In other words, a regular language is a language that can be described by a regular expression or a finite automaton.
+
+**Remember Chomsky's Heirarchy**
+3. Regular Grammar - recognised by *finite state automaton*
+2. Context Free Grammar - recognised by *pushdown automaton*
+1. Context Sensitve Grammar - recognised by *linear bounded automaton*
+
 # Non-deterministic finite automata: Definition
 **Definition**
 A non-deterministic finite automaton over an alphabet $Σ$ is  given by a set $V$ of states, a transition relation $δ ⊆V ×Σ ×V$, a  start state $s ∈V$ and a set of accepting (or final) states $F ⊆V$.
